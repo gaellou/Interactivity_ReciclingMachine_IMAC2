@@ -20,8 +20,28 @@ function draw() {
       overBox = false;
     }
   } 
-    
-  drawMobile()
+  drawBorne();
+ 
+  drawMobile();
+  
+
+}
+
+function drawBorne() {
+  let c = color(77,138,111);
+  fill(c); 
+  rect(50, 20, 400, 520); 
+  fill('black');
+  rect(130,300,40,200);
+  rect(330,300,40,200);
+  circle(147, 230, 50);
+  circle(347, 230, 50);
+  fill(190,247,242);
+  rect(110,90,270,50)
+  rect(110,150,70,45);
+  rect(310,150,70,45);
+  fill('white')
+  rect(225,300,50,50);
 }
 
 function drawMobile() {
@@ -52,4 +72,5 @@ function mouseDragged() {
 
 function mouseReleased() {
   locked = false;
+
 }
