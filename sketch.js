@@ -139,6 +139,20 @@ function drawBorne() {
   
   fill('white')
   rect(225,300,50,50);
+  fill('black')
+  rect(225,300,10,10);
+  rect(255,300,10,10);
+  rect(245,310,10,10);
+  rect(235,310,10,10);
+  rect(255,300,10,10);
+  rect(225,320,10,10);
+  rect(265,320,10,10);
+  rect(235,330,10,10);
+  rect(255,330,10,10);
+  rect(265,330,10,10);
+  rect(255,340,10,10);
+  rect(235,340,10,10);
+  rect(225,340,10,10);
 }
 
 function draggleMobile(){
@@ -183,8 +197,22 @@ function drawMobile() {
   fill(255,255,255);
   rect(phoneX+5,phoneY+5,phoneWidth-10,phoneHeight-10,10);
   if(openMachine==true){
-    fill('black')
+    fill('white')
     rect(phoneX+25,phoneY+25,50,50);
+    fill('black')
+    rect(phoneX+25,phoneY+25,10,10);
+    rect(phoneX+55,phoneY+25,10,10);
+    rect(phoneX+45,phoneY+25+10,10,10);
+    rect(phoneX+35,phoneY+25+10,10,10);
+    rect(phoneX+55,phoneY+25,10,10);
+    rect(phoneX+25,phoneY+25+20,10,10);
+    rect(phoneX+65,phoneY+25+20,10,10);
+    rect(phoneX+35,phoneY+25+30,10,10);
+    rect(phoneX+55,phoneY+25+30,10,10);
+    rect(phoneX+65,phoneY+25+30,10,10);
+    rect(phoneX+55,phoneY+25+40,10,10);
+    rect(phoneX+35,phoneY+25+40,10,10);
+    rect(phoneX+25,phoneY+25+40,10,10);
     fill(0,0,0);
     noStroke()
     textSize(12)
