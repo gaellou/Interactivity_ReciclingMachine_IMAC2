@@ -1,4 +1,4 @@
-let bx=70;
+let bx=700;
 let by=70;
 let boxWidth = 100;
 let boxHeight = 200;
@@ -27,10 +27,10 @@ function draw() {
 function drawMobile() {
   stroke(0);
   fill(0,0,0,100);
-  rect(bx,by,100,200,10);
+  rect(bx,by,boxWidth,boxHeight,10);
   stroke(0);
   fill(255,255,255,100);
-  rect(bx+5,by+5,90,190,10);
+  rect(bx+5,by+5,boxWidth-10,boxHeight-10,10);
 }
 
 function mousePressed() {
