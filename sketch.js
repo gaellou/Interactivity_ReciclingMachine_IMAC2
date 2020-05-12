@@ -6,6 +6,7 @@ let overBox = false;
 let locked = false;
 let xOffset = 0.0;
 let yOffset = 0.0;
+let openMachine = false;
 
 function setup() {
   createCanvas(1000, 1000);
@@ -13,18 +14,17 @@ function setup() {
 
 function draw() {
   background(220);
-   // Test if the cursor is over the box
-  if (mouseX > bx - boxWidth && mouseX < bx + boxWidth && mouseY > by - boxHeight && mouseY < by + boxHeight) {
-    overBox = true;
-    if (locked) {
-      overBox = false;
-    }
-  } 
-  drawBorne();
  
+  draggleMobile();
+  drawBorne();
   drawMobile();
-  
+  checkQRCode();
+}
 
+function checkQRCode(){
+  if(bx - 255 <5 && by - 300< 5){
+    openMachine=true;
+  }
 }
 
 function drawBorne() {
@@ -44,6 +44,17 @@ function drawBorne() {
   rect(225,300,50,50);
 }
 
+function draggleMobile(){
+    // Test if the cursor is over the box
+  if (mouseX > bx - boxWidth && mouseX < bx + boxWidth && mouseY > by - boxHeight && mouseY < by + boxHeight) {
+    overBox = true;
+    if (locked) {
+      overBox = false;
+    }
+  } 
+}
+
+
 function drawMobile() {
   stroke(0);
   fill(0,0,0,100);
@@ -51,6 +62,10 @@ function drawMobile() {
   stroke(0);
   fill(255,255,255,100);
   rect(bx+5,by+5,boxWidth-10,boxHeight-10,10);
+  if(openMachine==true){
+    fill('white')
+    rect(bx+25,by+25,50,50);
+  }
 }
 
 function mousePressed() {
