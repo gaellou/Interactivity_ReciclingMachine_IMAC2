@@ -16,7 +16,7 @@ let openMachine = false;
 let answer1 = 0;
 let answer2 =0;
 let points=0;
-let timerPoll=10;
+let timerPoll=60;
 let poll=[];
 let i=0;
 
