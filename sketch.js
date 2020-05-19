@@ -5,7 +5,7 @@ let phoneHeight = 200;
 let overPhone = false;
 let lockedPhone = false;
 let bottleX=750;
-let bottleY=500;
+let bottleY=400;
 let bottleWidth = 50;
 let bottleHeight = 120;
 let overBottle = false;
@@ -16,68 +16,93 @@ let openMachine = false;
 let answer1 = 0;
 let answer2 =0;
 let points=0;
-let timerPoll=60;
+let timerPoll=30;
 let poll=[];
 let i=0;
+let QRCodeDraw=false;
+let square = []
+let day =1
+let dayPoll=1;
+let sizePoll=1;
+let coord=[25,55,45,35,65]
+
 
 function setup() {
-  createCanvas(1000, 1000);
+  createCanvas(950, 750);
   textAlign(CENTER, CENTER);
- 
-  poll[0]="Préfèrez-vous le bus ou le métro ?";
-  poll[1]="Métro"
+  
+  
+  //Day 1
+  poll[0]="Do you prefer the bus or the metro?";
+  poll[1]="Metro"
   poll[2]="Bus"
   poll[3]=0
   poll[4]=0
   
-  poll[5]="Vos préoccupations ?";
-  poll[6]="Ecologie"
+  poll[5]="Your concerns?";
+  poll[6]="Ecology"
   poll[7]="Budget"
   poll[8]=0
   poll[9]=0
   
-  poll[10]="Prochain événement ?";
+  //Day 2
+  poll[10]="Next event?";
   poll[11]="Concert"
-  poll[12]="Théâtre"
+  poll[12]="Theater"
   poll[13]=0
   poll[14]=0
+  
+  poll[15]="Do you prefer neighbors' feast on March 12 or March 15?";
+  poll[16]="March 12"
+  poll[17]="March 15"
+  poll[18]=0
+  poll[19]=0
+  
+  sizePoll=poll.length/10;
   
 }
 
 function draw() {
   background(220);
-  draggleMobile();
-  draggleBottle();
+
   drawBorne();
+  drawInstruction();
+  timer();
   drawMobile();
   drawBottle();
   checkQRCode();
+  draggleMobile();
+  draggleBottle();
   recycle();
-  timer();
 }
 
 function timer(){
   noStroke()
   fill(0)
   textSize(16)
-  text(timerPoll, 250,180);
+  text('Time remaining', 250,220);
+  text(timerPoll, 250,250);
   if (frameCount % 60 == 0 && timerPoll > 0) {
     timerPoll --;
   }
   if (timerPoll == 0) {
     poll[i+3]=answer1
     poll[i+4]=answer2
-    timerPoll=10
+    timerPoll=30
     
-    if(i+5>poll.length-1){
+    if(i+10>poll.length-1){
       i=0
     }else{
-      i=i+5;
+      i=i+10;
     }
     answer1=poll[i+3]
     answer2=poll[i+4]
-    print(poll.length)
     openMachine=false;
+    day++;
+    dayPoll++;
+    if(day>sizePoll){
+      dayPoll=1;
+    }
   }
 }
 
@@ -87,15 +112,34 @@ function recycle(){
     answer1++;
     points++;
     bottleX = 750;
-    bottleY=500;
+    bottleY=400;
     lockedBottle=false;
+    poll[i+3]=answer1
+    poll[i+4]=answer2
+    if(i+5>dayPoll*10-1){
+      i=i-5
+    }else{
+      i=i+5;
+    }
+    answer1=poll[i+3]
+    answer2=poll[i+4]
+    
   }
   if(openMachine && (bottleX - 347 < 0.01 &&  bottleY - 230 <0.01)){
     answer2++;
     points++;
     bottleX = 750;
-    bottleY=500;
+    bottleY=400;
     lockedBottle=false;
+    poll[i+3]=answer1
+    poll[i+4]=answer2
+    if(i+5>dayPoll*10-1){
+      i=i-5
+    }else{
+      i=i+5;
+    }
+    answer1=poll[i+3]
+    answer2=poll[i+4]
   }
 }
 
@@ -136,28 +180,26 @@ function drawBorne() {
   text(poll[i], 110,90, 270,50);
   text(poll[i+1], 110,150, 70,45);
   text(poll[i+2], 310,150, 70,45);
-  
-  fill('white')
-  rect(225,300,50,50);
-  fill('black')
-  rect(225,300,10,10);
-  rect(255,300,10,10);
-  rect(245,310,10,10);
-  rect(235,310,10,10);
-  rect(255,300,10,10);
-  rect(225,320,10,10);
-  rect(265,320,10,10);
-  rect(235,330,10,10);
-  rect(255,330,10,10);
-  rect(265,330,10,10);
-  rect(255,340,10,10);
-  rect(235,340,10,10);
-  rect(225,340,10,10);
+  drawQRCode(200, 275)  
+}
+
+function drawInstruction(){
+   fill(0,0,0);
+  noStroke()
+  textSize(12)
+  text('Step 1 : Scan the QR code to open the machine and earn points', 650,300, 200, 50);
+  text('Step 2 : Draggle the bottle in the machine to answer the poll and recycle your bottle', 670, 550, 200, 50)
+  textSize(20)
+  text('Recycling machine', 150, 30, 200, 50)*
+  text('Day : ' + day, 150, 550, 200, 50)
+  textSize(14)
+  text('30 sec = 1 day = 2 questions for the demonstration', 150, 580, 200, 50)
 }
 
 function draggleMobile(){
     // Test if the cursor is over the box
   if (mouseX > phoneX - phoneWidth && mouseX < phoneX + phoneWidth && mouseY > phoneY - phoneHeight && mouseY < phoneY + phoneHeight) {
+    overBottle = false;
     overPhone = true;
     if (lockedPhone) {
       overPhone = false;
@@ -172,6 +214,7 @@ function draggleBottle(){
     // Test if the cursor is over the box
   if (mouseX > bottleX - bottleWidth && mouseX < bottleX + bottleWidth && mouseY > bottleY - bottleHeight && mouseY < bottleY + bottleHeight) {
     overBottle = true;
+    overPhone = false;
     if (lockedBottle) {
       overBottle = false;
     }
@@ -189,6 +232,26 @@ function drawBottle(){
   rect(bottleX-15,bottleY+20,50,100,10);
 }
 
+function drawQRCode(x,y){
+    if(!QRCodeDraw){
+      fill('white')
+      rect(x+25,y+25,50,50);
+      fill('black')
+      
+      for (let i = 0; i < random(15,30); i++) {
+         square[i]=random(coord)
+         square[i+1]=random(coord)
+      }
+      QRCodeDraw=true;
+    }
+   fill('white')
+      rect(x+25,y+25,50,50);
+      fill('black')
+   for (let i = 0; i < square.length; i++) {
+        rect(x+square[i],y+square[i+1],10,10);
+    }
+}
+
 function drawMobile() {
   stroke(0);
   fill(0,0,0,100);
@@ -197,22 +260,7 @@ function drawMobile() {
   fill(255,255,255);
   rect(phoneX+5,phoneY+5,phoneWidth-10,phoneHeight-10,10);
   if(openMachine==true){
-    fill('white')
-    rect(phoneX+25,phoneY+25,50,50);
-    fill('black')
-    rect(phoneX+25,phoneY+25,10,10);
-    rect(phoneX+55,phoneY+25,10,10);
-    rect(phoneX+45,phoneY+25+10,10,10);
-    rect(phoneX+35,phoneY+25+10,10,10);
-    rect(phoneX+55,phoneY+25,10,10);
-    rect(phoneX+25,phoneY+25+20,10,10);
-    rect(phoneX+65,phoneY+25+20,10,10);
-    rect(phoneX+35,phoneY+25+30,10,10);
-    rect(phoneX+55,phoneY+25+30,10,10);
-    rect(phoneX+65,phoneY+25+30,10,10);
-    rect(phoneX+55,phoneY+25+40,10,10);
-    rect(phoneX+35,phoneY+25+40,10,10);
-    rect(phoneX+25,phoneY+25+40,10,10);
+    drawQRCode(phoneX, phoneY)
     fill(0,0,0);
     noStroke()
     textSize(12)
