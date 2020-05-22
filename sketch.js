@@ -25,11 +25,13 @@ let day =1
 let dayPoll=1;
 let sizePoll=1;
 let coord=[25,55,45,35,65]
+let logo;
 
 
 function setup() {
   createCanvas(950, 750);
   textAlign(CENTER, CENTER);
+  logo =loadImage('https://raw.githubusercontent.com/gaellou/Interactivity_ReciclingMachine_IMAC2/master/img/logo.JPG');
   
   
   //Day 1
@@ -74,6 +76,7 @@ function draw() {
   draggleMobile();
   draggleBottle();
   recycle();
+  image(logo, 100, 100,120,100);
 }
 
 function timer(){
