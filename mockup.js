@@ -76,7 +76,7 @@ function draw() {
   draggleMobile();
   draggleBottle();
   recycle();
-  image(logo, 100, 100,100,100);
+  image(logo, 190, 360,120,120);
 }
 
 function timer(){
