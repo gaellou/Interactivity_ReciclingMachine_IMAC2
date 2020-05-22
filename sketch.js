@@ -80,6 +80,8 @@ function timer(){
   noStroke()
   fill(0)
   textSize(16)
+    let c = color(255, 212, 61);
+  fill(c);
   text('Time remaining', 250,220);
   text(timerPoll, 250,250);
   if (frameCount % 60 == 0 && timerPoll > 0) {
@@ -150,7 +152,7 @@ function checkQRCode(){
 }
 
 function drawBorne() {
-  let c = color(77,138,111);
+  let c = color(43, 71, 94);
   fill(c);
   rect(50, 20, 400, 520);
   
@@ -189,11 +191,14 @@ function drawInstruction(){
   textSize(12)
   text('Step 1 : Scan the QR code to open the machine and earn points', 650,300, 200, 50);
   text('Step 2 : Draggle the bottle in the machine to answer the poll and recycle your bottle', 670, 550, 200, 50)
-  textSize(20)
-  text('Recycling machine', 150, 30, 200, 50)*
+
   text('Day : ' + day, 150, 550, 200, 50)
   textSize(14)
   text('30 sec = 1 day = 2 questions for the demonstration', 150, 580, 200, 50)
+  let c = color(255, 212, 61);
+  fill(c);
+  textSize(20)
+  text('Recycling machine', 150, 30, 200, 50)
 }
 
 function draggleMobile(){
