@@ -31,7 +31,7 @@ let logo;
 function setup() {
   createCanvas(950, 750);
   textAlign(CENTER, CENTER);
-  logo =loadImage('https://raw.githubusercontent.com/gaellou/Interactivity_ReciclingMachine_IMAC2/master/img/logo.JPG');
+  logo =loadImage('https://raw.githubusercontent.com/gaellou/Interactivity_ReciclingMachine_IMAC2/master/assets/logo.JPG');
   
   
   //Day 1
