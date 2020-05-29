@@ -66,17 +66,16 @@ function setup() {
 
 function draw() {
   background(220);
-
   drawBorne();
   drawInstruction();
   timer();
+  image(logo, 190, 360,120,120);
   drawMobile();
   drawBottle();
-  checkQRCode();
   draggleMobile();
   draggleBottle();
+  checkQRCode();
   recycle();
-  image(logo, 190, 360,120,120);
 }
 
 function timer(){
@@ -272,13 +271,13 @@ function drawMobile() {
     fill(0,0,0);
     noStroke()
     textSize(12)
-    text('Points gagnés : +' + points, phoneX+20, phoneY+80, 70, 50);
+    text('Points : +' + points, phoneX+20, phoneY+80, 70, 50);
     stroke('black');
     fill('red')
     rect(phoneX+15,phoneY+150,70,20);
     noStroke()
     fill(250);
-    text('J\'ai fini', phoneX+15, phoneY+150, 70, 20);     
+    text('I\'m done', phoneX+15, phoneY+150, 70, 20);     
   }
 }
 
